@@ -3,6 +3,7 @@ env:
     REGISTRY_HOST: "docker.io"
     IMAGE_NAME: "pythonapp"
     IMAGE_TAG: "v1"
+    DOCKERFILE_CONTEXT: "github/new-scan-engine"
     
 name: Container build, scan and push
 on: [push, pull_request]
@@ -17,11 +18,12 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3.3.0
 
-    - name: Build and push
+    - name: Build and save
       uses: docker/build-push-action@v6.2.0
       with:
+       context: ${{ env.DOCKERFILE_CONTEXT }}
        load: true
-       tags: naveenrk/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+       tags: ${{ env.REGISTRY_HOST }}/${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
 
 
     - name: Setup cache
@@ -49,7 +51,7 @@ jobs:
       run: |
         ${GITHUB_WORKSPACE}/cache/sysdig-cli-scanner \
           --apiurl ${SYSDIG_SECURE_ENDPOINT} \
-          docker://${REGISTRY_HOST}/${{ secrets.REGISTRY_USER }}/${IMAGE_NAME}:${IMAGE_TAG} \
+          docker://${REGISTRY_HOST}/${{ secrets.DOCKERHUB_USERNAME }}/${IMAGE_NAME}:${IMAGE_TAG} \
           --console-log \
           --dbpath=${GITHUB_WORKSPACE}/cache/db/ \
           --cachepath=${GITHUB_WORKSPACE}/cache/scanner-cache/
