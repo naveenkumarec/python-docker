@@ -3,7 +3,7 @@ env:
     REGISTRY_HOST: "docker.io"
     IMAGE_NAME: "pythonapp"
     IMAGE_TAG: "v1"
-    DOCKERFILE_CONTEXT: "github/"
+    
 name: Container build, scan and push
 on: [push, pull_request]
 
@@ -20,6 +20,6 @@ jobs:
     - name: Build and save
       uses: docker/build-push-action@v6.2.0
       with:
-        context: ${{ env.DOCKERFILE_CONTEXT }}
+    
         tags: ${{ env.REGISTRY_HOST }}/${{ secrets.REGISTRY_USER }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
         load: true
