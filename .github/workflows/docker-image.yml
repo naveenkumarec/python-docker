@@ -31,9 +31,9 @@ jobs:
     - name: Setup cache
       uses: actions/cache@v4.0.2
       with:
-       path: cache
-       key: ${{ runner.os }}-cache-${{ hashFiles('**/sysdig-cli-scanner', '**/latest_version.txt', '**/db/main.db.meta.json', '**/scanner
-       restore-keys: ${{ runner.os }}-cache-
+        path: cache
+        key: ${{ runner.os }}-cache-${{ hashFiles('**/sysdig-cli-scanner', '**/latest_version.txt', '**/db/main.db.meta.json', '**/scanner-cache/inlineScannerCache.db') }}
+        restore-keys: ${{ runner.os }}-cache- 
       
     - name: Download sysdig-cli-scanner if needed
       run:  |
