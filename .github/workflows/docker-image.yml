@@ -3,7 +3,7 @@ env:
     REGISTRY_HOST: "docker.io"
     IMAGE_NAME: "pythonapp"
     IMAGE_TAG: "v1"
-    DOCKERFILE_CONTEXT: "github/new-scan-engine"
+    DOCKERFILE_CONTEXT: "github/"
     
 name: Container build, scan and push
 on: [push, pull_request]
