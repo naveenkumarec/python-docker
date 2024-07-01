@@ -22,3 +22,4 @@ jobs:
       with:
        load: true
        tags: naveenrk/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+       run:  docker image ls && docker container ls
