@@ -28,6 +28,6 @@ jobs:
       uses: docker/build-push-action@v6.2.0
       with:
         push: true
-        tags: naveenrk/voting:latest
+        tags: naveenrk/voting:${{ github.run_id }}
 
       
